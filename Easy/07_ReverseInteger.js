@@ -27,35 +27,41 @@ Example 3:
   Status: Success
 		Runtime: 76 ms, faster than 56.13% of JavaScript online submissions for Reverse Integer.
 ---------------------------*/
-// const reverse = (x) => {
-//   //for single digits
-//   if(-10<x && x<10) return x;
-  
-//   let numberArr = Math.abs(x).toString().split('').reverse();
-//   if (numberArr[0] === '0') numberArr.shift();
-//   let reverseNum = numberArr.join('');
-//   reverseNum = (Math.sign(x)<0) ? (parseInt(reverseNum)*-1) : (parseInt(reverseNum));
-
-//   //if reverse integer is outside of 32-bit signed range
-//   if(reverseNum < Math.pow(-2,31) || reverseNum > Math.pow(2,31) - 1) return 0;  
-
-//   return reverseNum;
-// };
+const reverse = (x) => {
+  //for single digits
+  if(-10<x && x<10) return x;
+  let rev = parseInt(Math.abs(x).toString().split('').reverse().join(''))*Math.sign(x);
+  //if reverse integer is outside of 32-bit signed range
+  if(rev < Math.pow(-2,31) || rev > Math.pow(2,31) - 1) return 0;  
+  return rev;
+};
 
 /*--------------------------- 
   Approach 2: Using math
+  Status: Success
+		Runtime: 76 ms
 ---------------------------*/
-const reverse = (x) => {
-  let rev = 0;
-  let limit = {
-    min: Math.pow(-2,31),
-    max: Math.pow(2,31) - 1
-  }
-  while(x!=0){
-    //remove last digit
-    let pop = x%10;
-    //divide by 10 to check against limit
-    x /= 10;
-  }
-  return rev;
-};
+// const reverse = (x) => {
+//   let output = 0;
+//   const limit = {
+//     min: Math.pow(-2,31),
+//     max: Math.pow(2,31) - 1
+//   }
+//   const sign = Math.sign(x);
+//   x = Math.abs(x);
+//   while(x!=0){
+//     //pop operation
+//     let pop = Math.floor(x%10);
+//     x = Math.floor(x/10);
+//     //push operation
+//     output = output * 10 + pop;
+//   }
+//     //check against limit
+//     if(output < limit.min || output > limit.max) return 0;
+//   return output*sign;
+// };
+
+console.log(reverse(123));
+console.log(reverse(-123));
+console.log(reverse(120));
+console.log(reverse(1147483649));
